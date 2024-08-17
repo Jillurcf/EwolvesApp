@@ -6,12 +6,18 @@ import InitialScreen from '../screens/InitialScreen';
 import ObUserAuthentication from '../screens/ObUserAuthentication';
 import Login from '../screens/auth/login/Login';
 import SignupForm from '../screens/auth/signup/Signup';
+import SelectInterest from '../screens/SelectInterest'
+import NewUser from '../screens/auth/newUser/NewUser';
+import UserHome from '../screens/userHome/UserHome';
 
 export type RootStackParamList = {
   InitialScreen: undefined;
   ua: undefined;
   login: undefined;
-  signup: undefined
+  signup: undefined;
+  selectInterest: undefined;
+  newUser: undefined;
+  userHome: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -68,8 +74,40 @@ const Navigation: React.FC = () => {
           }} 
         />
       
+        <Stack.Screen 
+          name="selectInterest" 
+          component={SelectInterest} 
+          options={{ headerShown: true, headerTitle: "", 
+            headerStyle: {
+                backgroundColor: "#F0EEFD", 
+               
+                
+              },
+              headerShadowVisible: false
 
-       
+
+          }} 
+        />      
+        <Stack.Screen 
+          name="newUser" 
+          component={NewUser} 
+          options={{ headerShown: true, headerTitle: "", 
+            headerStyle: {
+                backgroundColor: "#F0EEFD",               
+              },
+              headerShadowVisible: false
+          }} 
+        />      
+        <Stack.Screen 
+          name="userHome" 
+          component={UserHome} 
+          options={{ headerShown: true, headerTitle: "", 
+            headerStyle: {
+                backgroundColor: "#FEFEFE",               
+              },
+              headerShadowVisible: false
+          }} 
+        />      
       </Stack.Navigator>
      
     </NavigationContainer>

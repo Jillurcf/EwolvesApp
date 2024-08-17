@@ -11,8 +11,8 @@ const { width, height } = Dimensions.get('screen');
 
 type OnBoardingScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'InitialScreen'>;
 
-const ObUserAuthentication: React.FC = () => {
-    const navigation = useNavigation<OnBoardingScreenNavigationProp>();
+const ObUserAuthentication: React.FC = ({navigation}) => {
+    // const navigation = useNavigation<OnBoardingScreenNavigationProp>();
 
     const handleUser = () => {
       navigation.navigate('login');
@@ -42,7 +42,9 @@ const ObUserAuthentication: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonContainer} onPress={()=>{
+navigation?.navigate("selectInterest")
+          }}>
             <LinearGradient
               colors={['#9C8EEF', '#6C57EC', '#5443BB']}
               style={styles.button}
