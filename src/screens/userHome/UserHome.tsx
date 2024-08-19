@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native';
 import UserImg from '../../assets/Images/userHome/userImg.svg';
 import Notifyicons from 'react-native-vector-icons/MaterialIcons';
 import Baricons from 'react-native-vector-icons/AntDesign';
@@ -18,7 +18,106 @@ const { width, height } = Dimensions.get('screen');
 
 const Tab = createBottomTabNavigator();
 
-const UserHome: React.FC = () => {
+const UserHomeTabs: React.FC = () => {
+  return (
+    <Tab.Navigator
+    screenOptions={{
+      
+      headerShown: false,
+     tabBarShowLabel: true, 
+    
+      tabBarStyle: {
+        position: 'absolute',
+        bottom: 25,
+        left: 20,
+        right: 20,
+        paddingVertical: 10,
+        // elevation: 0,
+        // backgroundColor: "#ECE3EC",
+        backgroundColor: "rgba(236, 227, 236, 0.9)",
+        opacity: 20,
+        borderRadius: 15,
+        height: 60,
+        ...styles.shadow,
+      },
+      tabBarLabelStyle: {
+        fontSize: 12,
+        paddingBottom: 5,
+      },
+      tabBarItemStyle: {
+        justifyContent: 'center',
+        // alignItems: 'ceneter',
+        // paddingTop: 10,
+      },
+    
+     
+    }}
+
+    // tabBarOptions={{
+    //   activeTintColor: '#7D6BED',
+    //   inactiveTintColor: 'gray',
+    // }}
+  >
+
+    <Tab.Screen 
+      name="Home" 
+      component={UserHomeHome} 
+      options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color, size }) => (
+          <HomeIcon name="home" color={color} size={size} />
+        ),
+           tabBarActiveTintColor: "#8372EE"
+      }} 
+    />
+    <Tab.Screen 
+      name="Video" 
+      component={Video} 
+      options={{
+        tabBarLabel: 'Video',
+        tabBarIcon: ({ color, size }) => (
+          <VideoIcon name="video" color={color} size={size} />
+        ),
+        tabBarActiveTintColor: "#8372EE"
+      }} 
+    />
+    <Tab.Screen 
+      name="Inbox" 
+      component={Inbox} 
+      options={{
+        tabBarLabel: 'Inbox',
+        tabBarIcon: ({ color, size }) => (
+          <Baricons name="inbox" color={color} size={size} />
+        ),
+          tabBarActiveTintColor: "#8372EE"
+      }} 
+    />
+    <Tab.Screen 
+      name="Profile" 
+      component={Profile} 
+      options={{
+        tabBarLabel: 'Profile',
+        tabBarIcon: ({ color, size }) => (
+          <Baricons name="user" color={color} size={size} />
+        ),
+          tabBarActiveTintColor: "#8372EE"
+      }} 
+    />
+    
+  </Tab.Navigator>
+  )
+};
+
+
+const UserHome: React.FC = ({navigation}) => {
+  const handleNotifications = () => {
+    navigation.navigate('notifications')
+  }
+
+  const handleDrawer = () => {
+    console.log("object");
+    navigation.openDrawer();
+  }
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: width * 0.05 }}>
@@ -30,8 +129,12 @@ const UserHome: React.FC = () => {
           </View>
         </View>
         <View style={{ flexDirection: 'row', gap: 5 }}>
-          <Notifyicons name="circle-notifications" color="#6C6C6C" size={30} />
-          <Baricons name="bars" size={30} color="#6C6C6C" />
+         <TouchableOpacity onPress={handleNotifications}>
+         <Notifyicons name="circle-notifications" color="#6C6C6C" size={30} />
+         </TouchableOpacity>
+       <TouchableOpacity onPress={handleDrawer}>
+       <Baricons name="bars" size={30} color="#6C6C6C" />
+       </TouchableOpacity>
         </View>
       </View>
 
@@ -39,7 +142,8 @@ const UserHome: React.FC = () => {
         <View style={styles.searchContainer}>
           <SearchIcon name="search" size={20} color="#6C6C6C" style={styles.searchIcon} />
         </View>
-        <View style={{width: width * 0.25}}>
+       <TouchableOpacity>
+       <View style={{width: width * 0.25}}>
           <LinearGradient
             colors={['#9C8EEF', '#6C57EC', "#5443BB"]}
             style={styles.gradientContainer}
@@ -47,9 +151,10 @@ const UserHome: React.FC = () => {
             <FilterIcon style={{ padding: 2 }} name="filter" size={30} color="white" />
           </LinearGradient>
         </View>
+       </TouchableOpacity>
       </View>
 
-      <Tab.Navigator
+      {/* <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
             if (route.name === 'home') {
@@ -73,7 +178,8 @@ const UserHome: React.FC = () => {
         <Tab.Screen name="video" component={Video} />
         <Tab.Screen name="inbox" component={Inbox} />
         <Tab.Screen name="profile" component={Profile} />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
+        <UserHomeTabs />
     </View>
   );
 };
@@ -84,6 +190,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FEFEFE',
+    paddingTop: height * 0.02
   },
   searchContainer: {
     flexDirection: 'row',
@@ -106,4 +213,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 50,
   },
+  shadow: {
+    // for ios
+    shadowColor: '#7F5DF0',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+// for android
+    elevation: 5,
+    
+  }
 });

@@ -15,29 +15,29 @@ interface CarouselItem {
 const data: CarouselItem[] = [
   {
     id: '1',
-    title: 'Aesthetics',
+    title: 'Wedding',
     description: 'Enjoy special discounts, promotions, and perks reserve',
     backgroundColor: '#FFE082',
-    gradientColors: ['#E89469', '#DE6325', '#B5511F'], // Example gradient colors
-    img: require('../../../assets/Images/category/Aesthetics.png'),
+    gradientColors: ['#8EE88E', '#80D180', '#6BAE6B'], // Example gradient colors
+    img: require('../../../assets/Images/event/weddingImg.png'),
     offer: 'Exclusive Offers',
   },
   {
     id: '2',
-    title: 'Cuisine & Pastry',
+    title: 'Birthday',
     description: 'Enjoy special discounts, promotions, and perks reserve',
-    backgroundColor: '#82B1FF',
+    backgroundColor: 'B2A7FB',
     gradientColors: ['#9C8EEF', '#6C57EC', '#5443BB'], // Example gradient colors
-    img: require('../../../assets/Images/category/cuisine.png'),
+    img: require('../../../assets/Images/event/BithDayImg.png'),
     offer: 'Exclusive Offers',
   },
   {
     id: '3',
-    title: 'Aesthetics',
+    title: 'Baby Show',
     description: 'Enjoy special discounts, promotions, and perks reserve',
     backgroundColor: '#FFE082',
     gradientColors: ['#E89469', '#DE6325', '#B5511F'], // Example gradient colors
-    img: require('../../../assets/Images/category/Aesthetics.png'),
+    img: require('../../../assets/Images/event/babyShow.png'),
     offer: 'Exclusive Offers',
   },
   {
@@ -102,15 +102,16 @@ const EventCarousal = () => {
 
 const styles = StyleSheet.create({
   carouselItem: {
-    width: width * 0.36,
+    width: width * 0.38,
     height: height * 0.18,
-    marginHorizontal: width * 0.02,
+    marginHorizontal: width * 0.01,
     borderRadius: 20,
     padding: 20,
     marginLeft: width *  0.050,
     justifyContent: 'center',
     alignItems: 'center',
     // marginTop: 20,
+    overflow: 'hidden',
   },
   title: {
     fontSize: 12,
@@ -121,8 +122,10 @@ const styles = StyleSheet.create({
     // paddingHorizontal: width * 0.088,
   },
   image: {
-    width: width * 0.08,
-    height: height * 0.05,
+    width: width * 0.4,
+    height: height * 0.18,
+    overflow: 'hidden',
+    zIndex: 20,
   },
 });
 
