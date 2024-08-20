@@ -1,75 +1,18 @@
-// import React, { useState, useRef } from 'react';
-// import { View, Text, StyleSheet, Dimensions } from 'react-native';
-// import Carousel from 'react-native-snap-carousel';
+import React, { useRef } from 'react';
+import { View, FlatList, StyleSheet, Text, Image, Dimensions } from 'react-native';
 
-// const sliderWidth = Dimensions.get('window').width;
-// const itemWidth = Math.round(sliderWidth * 0.8);
-// const itemHeight = 250;
+const { width, height } = Dimensions.get('window');
 
-// interface CarouselItem {
-//     title: string;
-// }
-
-// const UserHomeHomeCarousal: React.FC = () => {
-//     const [entries, setEntries] = useState<CarouselItem[]>([
-//         { title: 'Item 1' },
-//         { title: 'Item 2' },
-//         { title: 'Item 3' },
-//     ]);
-
-//     const carouselRef = useRef<Carousel<CarouselItem>>(null);
-
-//     const renderItem = ({ item }: { item: CarouselItem }) => (
-//         <View style={[styles.slide, { height: itemHeight }]}>
-//             <Text style={styles.title}>{item.title}</Text>
-//         </View>
-//     );
-
-//     return (
-//         <Carousel
-//             ref={carouselRef}
-//             data={entries}
-//             renderItem={renderItem}
-//             sliderWidth={sliderWidth}
-//             itemWidth={itemWidth}
-//             itemHeight={itemHeight}
-//         />
-//     );
-// };
-
-// export default UserHomeHomeCarousal;
-
-// const styles = StyleSheet.create({
-//     slide: {
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         backgroundColor: '#F5F5F5',
-//         borderRadius: 8,
-//         padding: 15,
-//     },
-//     title: {
-//         fontSize: 18,
-//         fontWeight: 'bold',
-//     },
-// });
-
-import React, {useRef} from 'react';
-import {
-  View,
-  FlatList,
-  Dimensions,
-  StyleSheet,
-  Text,
-  Image,
-} from 'react-native';
-
-const {width, height} = Dimensions.get('window');
+// Assuming tablet screens have a width greater than or equal to 768
+const isTablet = width >= 768;
 
 interface CarouselItem {
   id: string;
   title: string;
-  description: string;
+  description: any;
   backgroundColor: string;
+  img: any;
+  offer: string;
 }
 
 const data: CarouselItem[] = [
@@ -97,24 +40,15 @@ const data: CarouselItem[] = [
     img: require('../../../assets/Images/SliderImg/SliderImg1.png'),
     offer: 'Exclusive Offers',
   },
-  {
-    id: '4',
-    title: 'Explore Your Talent',
-    description: 'Enjoy special discounts, promotions, and perks reserve',
-    backgroundColor: '#FFE082',
-    img: require('../../../assets/Images/SliderImg/SliderImg1.png'),
-    offer: 'Exclusive Offers',
-  },
-  // Add more items as needed
+  // ... other items
 ];
 
-const UserHomeHomeCarousal = () => {
+const UserHomeHomeCarousal: React.FC = () => {
   const flatListRef = useRef<FlatList>(null);
 
-  const renderItem = ({item}: {item: CarouselItem}) => (
-    <View
-      style={[styles.carouselItem, {backgroundColor: item.backgroundColor}]}>
-      <View style={{flexDirection: 'row'}}>
+  const renderItem = ({ item }: { item: CarouselItem }) => (
+    <View style={[styles.carouselItem, { backgroundColor: item.backgroundColor }]}>
+      <View style={{ flexDirection: 'row' }}>
         <View>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.offer}>{item.offer}</Text>
@@ -142,42 +76,43 @@ const UserHomeHomeCarousal = () => {
 
 const styles = StyleSheet.create({
   carouselItem: {
-    width: width * 0.9,
-    height: height * 0.2,
+    width: isTablet ? width * 0.8 : width * 0.9,
+    height: isTablet ? height * 0.5 : height * 0.2,
     marginHorizontal: width * 0.05,
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: width * 0.04,
+    padding: width * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: height * 0.03,
   },
   title: {
-    fontSize: 18,
+    fontSize: isTablet ? width * 0.035 : width * 0.045,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 10,
-    paddingLeft: 80,
-    marginTop: 12
+    marginBottom: height * 0.01,
+    paddingLeft: isTablet ? width * 0.15 : width * 0.19,
+    // marginTop: height * 0.012,
+    marginTop: isTablet ? height * 0.08 : height * 0.012,
   },
   offer: {
-    fontSize: 16,
+    fontSize: isTablet ? width * 0.03 : width * 0.035,
     fontWeight: 'bold',
     color: '#426173',
-    marginBottom: 10,
-    paddingLeft: 80
+    marginBottom: height * 0.02,
+    paddingLeft: isTablet ? width * 0.15 : width * 0.19,
   },
   description: {
-    fontSize: 12,
+    fontSize: isTablet ? width * 0.025 : width * 0.03,
     color: '#666',
-    textAlign: 'start',
-    paddingLeft: 80
+    textAlign: 'left',
+    paddingLeft: isTablet ? width * 0.15 : width * 0.19,
   },
   image: {
-    width: width * 0.3,
-    height: height * 0.2,
-    marginTop: -50,
-    // zIndex: 20,
-    marginRight:50
+    width: isTablet ? width * 0.25 : width * 0.3,
+    height: isTablet ? height * 0.55 : height * 0.2,
+    marginTop: isTablet ? height * -0.08 : height * -0.067,
+    marginRight: isTablet ? width * 0.1 : width * 0.15,
+    overflow: 'hidden',
   },
 });
 

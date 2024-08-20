@@ -3,13 +3,16 @@ import { View, FlatList, Dimensions, StyleSheet, Text, Image, SafeAreaView } fro
 import LinearGradient from 'react-native-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
+const isTablet = width >= 768;
 
 interface CarouselItem {
   id: string;
   title: string;
   description: string;
   backgroundColor: string;
-  gradientColors: string[]; // Added to hold gradient colors
+  gradientColors: string[]; 
+  img: any;
+  offer: any;
 }
 
 const data: CarouselItem[] = [
@@ -65,7 +68,7 @@ const EventCarousal = () => {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
     >
-      <View style={{ flexDirection: 'row', gap: 10 }}>
+      <View style={{ flexDirection: 'row', gap: width * 0.010 }}>
         <View>
           <Image source={item.img} style={styles.image} />
         </View>
@@ -102,11 +105,11 @@ const EventCarousal = () => {
 
 const styles = StyleSheet.create({
   carouselItem: {
-    width: width * 0.38,
-    height: height * 0.18,
+    width: isTablet ? width * 0.35 :  width * 0.38,
+    height: isTablet ? height * 0.6 : height * 0.18,
     marginHorizontal: width * 0.01,
-    borderRadius: 20,
-    padding: 20,
+    borderRadius:  isTablet ? width * 0.03 : width * 0.080,
+    // padding: width * 0.020,
     marginLeft: width *  0.050,
     justifyContent: 'center',
     alignItems: 'center',
@@ -114,18 +117,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   title: {
-    fontSize: 12,
+    fontSize: width * 0.03,
     color: '#6C6C6C',
-    marginBottom: 10,
-    marginTop: 12,
+    marginBottom: height * 0.010,
+    marginTop: height *  0.012,
     textAlign: 'center',
     // paddingHorizontal: width * 0.088,
   },
   image: {
-    width: width * 0.4,
-    height: height * 0.18,
-    overflow: 'hidden',
-    zIndex: 20,
+    width: isTablet ? width * 0.35 : width * 0.4,
+    height: isTablet ? height * 0.6 : height * 0.18,
+    // overflow: 'hidden',
+    // zIndex: 20,
   },
 });
 

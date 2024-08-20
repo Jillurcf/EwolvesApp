@@ -143,6 +143,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import ArchiveIcon from 'react-native-vector-icons/Octicons';
 import Notifications from '../screens/userHome/notifications/Notifications';
 import Baricons from 'react-native-vector-icons/AntDesign';
+import { messaging } from '@react-native-firebase/messaging';
+import Messaging from '../screens/userHome/messaging/Messaging';
 
 const {width, height} = Dimensions.get('screen')
 export type RootStackParamList = {
@@ -154,6 +156,7 @@ export type RootStackParamList = {
   newUser: undefined;
   userHome: undefined;
   notifications: undefined;
+  messaging: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -164,7 +167,10 @@ const MainStackNavigator: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.openDrawer(); 
   };
   return (
-    <Stack.Navigator screenOptions={{ headerShown: true }}>
+    <Stack.Navigator screenOptions={{ headerShown: true,
+animation: 'slide_from_right',
+
+     }}>
       <Stack.Screen 
         name="InitialScreen" 
         component={InitialScreen} 
@@ -233,6 +239,21 @@ const MainStackNavigator: React.FC<{ navigation: any }> = ({ navigation }) => {
       <Stack.Screen 
         name="notifications" 
         component={Notifications} 
+        options={{ headerShown: true, headerTitle: "", 
+          headerStyle: {
+              backgroundColor: "#FEFEFE",
+            },
+            headerShadowVisible: false,
+            headerRight: () => (
+              <TouchableOpacity onPress={handleDrawer} style={{ marginRight: 10 }}>
+                <Baricons name="bars" size={30} color="#6C6C6C" />
+              </TouchableOpacity>
+            ),
+        }} 
+      />      
+      <Stack.Screen 
+        name="messaging" 
+        component={Messaging} 
         options={{ headerShown: true, headerTitle: "", 
           headerStyle: {
               backgroundColor: "#FEFEFE",

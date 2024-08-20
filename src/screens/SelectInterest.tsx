@@ -77,8 +77,7 @@ const data = [
 const SelectInterest: React.FC = () => {
 const navigation = useNavigation()
 
-  const handleNewUser = () => {
-    
+  const handleNewUser = () => {  
     navigation.navigate('newUser')
   }
   return (
@@ -128,32 +127,33 @@ const styles = StyleSheet.create({
     
   },
   header: {
-    fontSize: 20,
+    fontSize: width * 0.060,
     fontWeight: 'bold',
-    marginBottom: Spacings.s5,
+    marginBottom: height * 0.02,
+    textAlign: 'center'
   },
   item: {
     backgroundColor:'#f0f0f0',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: Spacings.s2,
-    borderRadius: 8,
+    padding: height * 0.02,
+    borderRadius: width * 0.08,
   },
   itemText: {
-    fontSize: 14,
+    fontSize: width * 0.03,
   },
   gradientButton: {
-    marginVertical: 20,
-    borderRadius: 25,
+    marginVertical: height * 0.020,
+    borderRadius: width * 0.045,
     overflow: 'hidden',
   },
   gradientBackground: {
-    paddingVertical: 15,
+    paddingVertical: height * 0.015,
     alignItems: 'center',
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: width * 0.05,
     fontWeight: 'bold',
   },
 });

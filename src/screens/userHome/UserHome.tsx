@@ -15,41 +15,69 @@ import Inbox from './inbox/Inbox';
 import Profile from './profile/Profile';
 
 const { width, height } = Dimensions.get('screen');
+const isTablet = width >= 768;
 
 const Tab = createBottomTabNavigator();
+
+interface CustomTabBarButtonProps {
+  onPress?: () => void; // Adjust type here
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+}
+const CustomTabBarButton: React.FC<CustomTabBarButtonProps> = ({children, onPress }) => (
+  <TouchableOpacity
+  style={{
+    top: -30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...styles.shadow
+
+  }}
+  onPress={onPress}
+  >
+    <View style={{
+      width: 70,
+      height: 70,
+      borderRadius: 35,
+      backgroundColor: "rgba(236, 227, 236, 0.9)",
+    }}>
+      {children}
+    </View>
+  </TouchableOpacity>
+)
 
 const UserHomeTabs: React.FC = () => {
   return (
     <Tab.Navigator
     screenOptions={{
-      
+    
       headerShown: false,
      tabBarShowLabel: true, 
     
       tabBarStyle: {
         position: 'absolute',
-        bottom: 25,
-        left: 20,
-        right: 20,
-        paddingVertical: 10,
+        bottom: height * 0.035,
+        left: width * 0.060,
+        right: width * 0.060,
+        paddingVertical: height * 0.007,
         // elevation: 0,
         // backgroundColor: "#ECE3EC",
         backgroundColor: "rgba(236, 227, 236, 0.9)",
-        opacity: 20,
-        borderRadius: 15,
-        height: 60,
+        // opacity: 100,
+        borderRadius: width * 0.065,
+        height: isTablet ? height * 0.1 : height * 0.070,
         ...styles.shadow,
       },
       tabBarLabelStyle: {
-        fontSize: 12,
-        paddingBottom: 5,
+        fontSize:width * 0.025,
+        paddingBottom: height * 0.005,
       },
       tabBarItemStyle: {
         justifyContent: 'center',
         // alignItems: 'ceneter',
         // paddingTop: 10,
       },
-    
+   
      
     }}
 
@@ -81,6 +109,20 @@ const UserHomeTabs: React.FC = () => {
         tabBarActiveTintColor: "#8372EE"
       }} 
     />
+    {/* <Tab.Screen 
+      name="Post" 
+      component={Inbox} 
+      options={{
+        tabBarLabel: 'Inbox',
+        tabBarIcon: ({ color, size }) => (
+          <Baricons name="pluscircle" color={color} size={size} />
+        ),
+          tabBarActiveTintColor: "#8372EE",
+          tabBarButton: (props) => (
+            <CustomTabBarButton {...props} />
+          )
+      }} 
+    /> */}
     <Tab.Screen 
       name="Inbox" 
       component={Inbox} 

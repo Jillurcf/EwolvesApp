@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('screen');
 
-const data = [
+const notificationsData = [
   {
     id: 1,
     img: require('../../../assets/Images/notifiactions/notificationImg1.jpg'),
@@ -37,39 +38,48 @@ const data = [
     name: 'Maria',
     role: '*Artist',
     impressions: 'Reacted on your gig',
-    time: '2 minutes',
+    time: '2 minutes ago',
     backgroundColor: '#FBF9EB',
   },
 ];
 
-interface NotificationsProps {}
+interface NotificationsProps {
+  navigation: any;
+}
 
 const Notifications = (props: NotificationsProps) => {
+
+  const handleNotificationPress = (notification: typeof notificationsData[0]) => {
+    props.navigation.navigate('messaging', {
+      userId: notification.id,
+      userName: notification.name,
+    });
+  };
+
   return (
     <View style={styles.container}>
-      {data?.map((d) => (
-       <View style={[
-        styles.notificationItemContainer,
-        { backgroundColor: d.backgroundColor },
-      ]}>
-         <View
-          key={d.id}
-          style={[
-            styles.notificationItem,
-            { backgroundColor: d.backgroundColor },
-          ]}
+      {notificationsData.map((notification) => (
+        <TouchableOpacity
+          key={notification.id}
+          onPress={() => handleNotificationPress(notification)}
         >
-          <Image style={styles.image} source={d.img} />
-          <View style={styles.textContainer}>
-            <View style={styles.textRow}>
-              <Text style={styles.name}>{d.name}</Text>
-              <Text style={styles.role}>{d.role}</Text>
+          <View
+            style={[
+              styles.notificationItem,
+              { backgroundColor: notification.backgroundColor },
+            ]}
+          >
+            <Image style={styles.image} source={notification.img} />
+            <View style={styles.textContainer}>
+              <View style={styles.textRow}>
+                <Text style={styles.name}>{notification.name}</Text>
+                <Text style={styles.role}>{notification.role}</Text>
+              </View>
+              <Text style={styles.impressions}>{notification.impressions}</Text>
             </View>
-            <Text style={styles.impressions}>{d.impressions}</Text>
+            <Text style={styles.time}>{notification.time}</Text>
           </View>
-          <Text style={styles.time}>{d.time}</Text>
-        </View>
-       </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -78,24 +88,20 @@ const Notifications = (props: NotificationsProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // padding: 10,
-    gap: 10,
-  },
-  notificationItemContainer:{
-
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   notificationItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    paddingHorizontal: width * 0.025,
-    paddingVertical: 10,
+    padding: 10,
     borderRadius: 5,
   },
   image: {
     width: 50,
     height: 50,
-    borderRadius: 50,
+    borderRadius: 25,
     marginRight: 10,
   },
   textContainer: {

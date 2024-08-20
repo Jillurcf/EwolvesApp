@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "530857588655",
+    "project_id": "ewolveapp",
+    "storage_bucket": "ewolveapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530857588655:android:77a0ed220fd913e435a15a",
+        "android_client_info": {
+          "package_name": "com.ewolveapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbuVc16uBO4oKEnXcSw8WJEoJWZEoVRjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
