@@ -16,7 +16,8 @@ import Profile from './profile/Profile';
 
 const { width, height } = Dimensions.get('screen');
 const isTablet = width >= 768;
-
+const userImgSize = width * 0.12;
+const filterBox = width * 0.1
 const Tab = createBottomTabNavigator();
 
 interface CustomTabBarButtonProps {
@@ -162,12 +163,14 @@ const UserHome: React.FC = ({navigation}) => {
   }
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: width * 0.05 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: width * 0.05, paddingVertical: height * 0.008 }}>
         <View style={{ flexDirection: 'row', gap: 10 }}>
-          <UserImg />
+        <View style={styles.userImgContainer}>
+        <UserImg />
+        </View>
           <View style={{ paddingVertical: 2 }}>
-            <Text>Good Morning</Text>
-            <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 18 }}>User Name</Text>
+            <Text style={{fontSize: width * 0.03}}>Good Morning</Text>
+            <Text style={{ color: 'black', fontWeight: 'bold', fontSize: width *0.04 }}>User Name</Text>
           </View>
         </View>
         <View style={{ flexDirection: 'row', gap: 5 }}>
@@ -180,7 +183,7 @@ const UserHome: React.FC = ({navigation}) => {
         </View>
       </View>
 
-      <View style={{ paddingHorizontal: width * 0.05, paddingVertical: height * 0.02, flexDirection: 'row', gap: 10 }}>
+      <View style={{ paddingHorizontal: width * 0.05, paddingVertical: height * 0.015, flexDirection: 'row', gap: 10 }}>
         <View style={styles.searchContainer}>
           <SearchIcon name="search" size={20} color="#6C6C6C" style={styles.searchIcon} />
         </View>
@@ -190,7 +193,7 @@ const UserHome: React.FC = ({navigation}) => {
             colors={['#9C8EEF', '#6C57EC', "#5443BB"]}
             style={styles.gradientContainer}
           >
-            <FilterIcon style={{ padding: 2 }} name="filter" size={30} color="white" />
+            <FilterIcon style={{ padding: 2 }} name="filter" size={25} color="white" />
           </LinearGradient>
         </View>
        </TouchableOpacity>
@@ -232,28 +235,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FEFEFE',
-    paddingTop: height * 0.02
+    // paddingTop: height * 0.02
+  },
+  userImgContainer: {
+    width: userImgSize,
+    height: userImgSize,
+    borderWidth: 1,
+    borderColor: "red",
+    borderRadius: userImgSize / 2, 
+    overflow: 'hidden', 
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: '#6C6C6C',
     borderWidth: 0.5,
-    borderRadius: 25,
+    borderRadius: width * 0.12,
     backgroundColor: '#FDFDFD',
-    height: 50,
-    paddingHorizontal: 10,
+    height: height * 0.050,
+    paddingHorizontal: height * 0.020,
     width: width * 0.75,
   },
   searchIcon: {
-    marginRight: 10,
+    marginRight: width * 0.020,
   },
   gradientContainer: {
-    width: 50,
-    height: 50,
+    width: filterBox,
+    height: filterBox,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50,
+    borderRadius: filterBox / 2,
   },
   shadow: {
     // for ios

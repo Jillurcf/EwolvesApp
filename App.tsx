@@ -5,10 +5,12 @@ import Navigation from './src/navigation/Navigation';
 // import InitialScreen from './src/screens/InitialScreen'
 // import SelectInterest from './src/screens/SelectInterest'
 import NewUser from './src/screens/auth/newUser/NewUser'
+import Test from './src/screens/TestScreen';
 const App = () => {
   return (
   // <SelectInterest />
-  <Navigation />
+  // <Navigation />
+  <Test />
   // <NewUser />
 )
 }
